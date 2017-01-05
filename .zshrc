@@ -143,9 +143,6 @@ function sshup() {
   #ssh-add ~/.ssh/varo_prod.pem
 }
 
-function jumphost() {
-  ssh -A ec2-user@52.42.249.197
-}
 # Start ssh agent
 eval `ssh-agent -s`
 sshup
