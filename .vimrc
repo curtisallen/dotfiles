@@ -6,6 +6,7 @@ set nofoldenable
 set nocompatible
 set nobackup
 set nowb
+set number
 set noswapfile
 set ic
 set mouse=a 
@@ -85,6 +86,9 @@ map <C-m> :cprevious<CR>
 nnoremap <leader>a :cclose<CR>
 autocmd FileType go nmap <leader>r  <Plug>(go-run)
 autocmd FileType go nmap <leader>t  <Plug>(go-test)
+au FileType go nmap <Leader>ds <Plug>(go-def-split)
+au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
+au FileType go nmap <Leader>dt <Plug>(go-def-tab)
 let g:go_list_type = "quickfix"
 let g:go_fmt_command = "goimports"
 
