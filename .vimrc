@@ -1,3 +1,45 @@
+"NeoBundle Scripts-----------------------------
+if &compatible
+  set nocompatible               " Be iMproved
+endif
+
+" Required:
+set runtimepath+=/Users/callen/.vim/bundle/neobundle.vim/
+
+" Required:
+call neobundle#begin(expand('/Users/callen/.vim/bundle'))
+
+" Let NeoBundle manage NeoBundle
+" Required:
+NeoBundleFetch 'Shougo/neobundle.vim'
+
+" Add or remove your Bundles here:
+NeoBundle 'Shougo/neosnippet.vim'
+NeoBundle 'Shougo/neosnippet-snippets'
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'ctrlpvim/ctrlp.vim'
+NeoBundle 'flazz/vim-colorschemes'
+NeoBundle 'faith/vim-go'
+NeoBundle 'vim-airline/vim-airline'
+NeoBundle 'vim-airline/vim-airline-themes'
+NeoBundle 'Yggdroot/indentLine'
+NeoBundle 'editorconfig/editorconfig-vim'
+NeoBundle 'Shougo/deoplete.nvim'
+NeoBundle 'ryanoasis/vim-devicons'
+NeoBundle 'ctrlpvim/ctrlp.vim'
+NeoBundle 'terryma/vim-multiple-cursors'
+
+" Required:
+call neobundle#end()
+
+" Required:
+filetype plugin indent on
+
+" If there are uninstalled bundles found on startup,
+" this will conveniently prompt you to install them.
+NeoBundleCheck
+"End NeoBundle Scripts-------------------------
+
 call pathogen#infect()
 syntax on
 filetype plugin indent on
@@ -22,6 +64,9 @@ set background=dark
 let g:solarized_termcolors=256
 set t_Co=16 " added for chromeos crosh chroot ubuntu
 colorscheme solarized
+"set guifont=Knack\ Bold\ Italic\ Nerd\ Font\ Complete\ Mono:h12
+"set guifont=Sauce\ Code\ Pro\ Nerd\ Font\ Complete:h13
+set guifont=devicons
 
 
 " quiet pls
@@ -110,3 +155,10 @@ let g:go_highlight_types = 1
 let g:go_highlight_fields = 1
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
+
+" airline theme
+let g:airline_theme='solarized'
+let g:airline_powerline_fonts = 1
+let g:indentLine_char='│'
+let g:indentLine_color_term = 239
+let g:deoplete#enable_at_startup = 1
