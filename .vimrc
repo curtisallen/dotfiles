@@ -27,6 +27,7 @@ NeoBundle 'editorconfig/editorconfig-vim'
 NeoBundle 'Shougo/deoplete.nvim'
 NeoBundle 'ctrlpvim/ctrlp.vim'
 NeoBundle 'terryma/vim-multiple-cursors'
+NeoBundle 'neomake/neomake'
 
 " Required:
 call neobundle#end()
@@ -154,6 +155,10 @@ let g:go_highlight_types = 1
 let g:go_highlight_fields = 1
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
+let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
+let g:go_metalinter_autosave_enabled = ['vet', 'golint']
+let g:go_metalinter_deadline = "5s"
+let g:go_metalinter_autosave = 1
 
 " airline theme
 let g:airline_theme='solarized'
