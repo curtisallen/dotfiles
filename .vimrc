@@ -25,7 +25,6 @@ NeoBundle 'vim-airline/vim-airline-themes'
 NeoBundle 'Yggdroot/indentLine'
 NeoBundle 'editorconfig/editorconfig-vim'
 NeoBundle 'Shougo/deoplete.nvim'
-NeoBundle 'ryanoasis/vim-devicons'
 NeoBundle 'ctrlpvim/ctrlp.vim'
 NeoBundle 'terryma/vim-multiple-cursors'
 
