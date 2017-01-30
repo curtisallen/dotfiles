@@ -28,6 +28,7 @@ NeoBundle 'Shougo/deoplete.nvim'
 NeoBundle 'ctrlpvim/ctrlp.vim'
 NeoBundle 'terryma/vim-multiple-cursors'
 NeoBundle 'neomake/neomake'
+NeoBundle 'chase/vim-ansible-yaml'
 
 " Required:
 call neobundle#end()
@@ -40,7 +41,7 @@ filetype plugin indent on
 NeoBundleCheck
 "End NeoBundle Scripts-------------------------
 
-call pathogen#infect()
+"call pathogen#infect()
 syntax on
 filetype plugin indent on
 set encoding=utf-8
@@ -166,3 +167,13 @@ let g:airline_powerline_fonts = 1
 let g:indentLine_char='│'
 let g:indentLine_color_term = 239
 let g:deoplete#enable_at_startup = 1
+
+" yaml formatting
+au BufReadPost *.yml set filetype=ansible
+au BufReadPost *.yaml set filetype=ansible
+
+" neomake checking
+autocmd! BufWritePost * Neomake
+
+"let g:neomake_yml_yamllint_maker = ['yamllint']
+let g:neomake_yml_enabled_makers = ['yamllint']
