@@ -54,7 +54,9 @@ export GOPATH='/Users/callen/src'
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git gitignore github node osx sublime brew compleate termialapp history-substring-search nvm-zsh ssh-agent fab vagrant jump jsontools go docker tmux aws terraform emoji go httpie valut dircycle zsh-navigation-tools zsh-syntax-highlighting battery httpie scd)
+# git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+# git clone git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
+plugins=(git gitignore github node osx sublime brew compleate termialapp history-substring-search nvm-zsh ssh-agent fab vagrant jump jsontools go docker tmux aws terraform emoji go httpie valut dircycle zsh-navigation-tools zsh-autosuggestions zsh-syntax-highlighting battery httpie scd)
 
 # User configuration
 # zsh cd widget
