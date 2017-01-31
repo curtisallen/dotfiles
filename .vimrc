@@ -18,7 +18,9 @@ NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'Shougo/neosnippet.vim'
 NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'ctrlpvim/ctrlp.vim'
+"NeoBundle 'ctrlpvim/ctrlp.vim'
+NeoBundle 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+NeoBundle 'junegunn/fzf.vim'
 NeoBundle 'flazz/vim-colorschemes'
 NeoBundle 'faith/vim-go'
 NeoBundle 'vim-airline/vim-airline'
@@ -178,3 +180,35 @@ autocmd! BufWritePost * Neomake
 
 "let g:neomake_yml_yamllint_maker = ['yamllint']
 let g:neomake_yml_enabled_makers = ['yamllint']
+
+" fzf stuff
+if has('nvim')
+  let $FZF_DEFAULT_OPTS .= ' --inline-info'
+  " let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
+endif
+" This is the default extra key bindings
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
+" Customize fzf colors to match your color scheme
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
+" [Tags] Command to generate tags file
+let g:fzf_tags_command = '`brew --prefix`/bin/ctags'
+" Mapping selecting mappings
+nnoremap <leader>f :Files<CR>
+

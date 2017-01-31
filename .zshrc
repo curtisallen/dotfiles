@@ -197,3 +197,5 @@ fi
 if [ -f /Users/callen/google-cloud-sdk/completion.zsh.inc ]; then
   source '/Users/callen/google-cloud-sdk/completion.zsh.inc'
 fi
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
