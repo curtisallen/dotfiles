@@ -176,7 +176,7 @@ alias go15='eval "$(GIMME_GO_VERSION=1.5 gimme)"'
 alias go16='eval "$(GIMME_GO_VERSION=1.6.2 gimme)"'
 alias go17='eval "$(GIMME_GO_VERSION=1.7.1 gimme)"'
 go17
-unalias gb
+
 #export PATH="$HOME/.gobrew/bin:$PATH"
 #eval "$(gobrew init -)"
 # NPM runscript
@@ -184,6 +184,11 @@ alias npmrs='npm run-script'
 # Postgres database
 alias pgstart='pg_ctl -D /usr/local/var/postgres9.5 -l /usr/local/var/postgres9.5/server.log start'
 alias pgstop='pg_ctl -D /usr/local/var/postgres9.5 stop -s -m fast'
+
+# commit to neovim
+alias vim='nvim'
+alias vi='nvim'
+
 #function code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $*; }
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
