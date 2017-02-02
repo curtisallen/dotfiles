@@ -189,6 +189,9 @@ alias pgstop='pg_ctl -D /usr/local/var/postgres9.5 stop -s -m fast'
 alias vim='nvim'
 alias vi='nvim'
 
+# gitcheckout magic
+alias gcorb='git checkout --track -b $(git branch -r | fzf)'
+
 #function code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $*; }
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
