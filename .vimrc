@@ -33,6 +33,10 @@ NeoBundle 'ctrlpvim/ctrlp.vim'
 NeoBundle 'terryma/vim-multiple-cursors'
 NeoBundle 'neomake/neomake'
 NeoBundle 'chase/vim-ansible-yaml'
+NeoBundle 'tpope/vim-unimpaired'
+NeoBundle 'scrooloose/nerdcommenter'
+NeoBundle 'tpope/vim-surround'
+NeoBundle 'raimondi/delimitmate'
 
 " Required:
 call neobundle#end()
