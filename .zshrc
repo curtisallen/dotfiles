@@ -190,7 +190,7 @@ alias vim='nvim'
 alias vi='nvim'
 
 # gitcheckout magic
-alias gcorb='git checkout --track -b $(git branch -r | fzf)'
+alias gcob='git checkout $(git branch | fzf)'
 
 #function code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $*; }
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
