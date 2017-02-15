@@ -91,6 +91,7 @@ set sw=2
 
 " \+n toggles the nerdtree
 map <leader>n :NERDTreeToggle<CR>
+let NERDTreeShowHidden=1
 autocmd VimEnter * NERDTree
 autocmd VimEnter * wincmd p
 " Auto quit NERDTree if it's the only buffer
@@ -168,6 +169,7 @@ let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
 let g:go_metalinter_autosave_enabled = ['vet', 'golint']
 let g:go_metalinter_deadline = "5s"
 let g:go_metalinter_autosave = 1
+let g:go_term_enabled=1
 
 " airline theme
 let g:airline_theme='solarized'
@@ -185,7 +187,8 @@ autocmd! BufWritePost * Neomake
 
 "let g:neomake_yml_yamllint_maker = ['yamllint']
 let g:neomake_yml_enabled_makers = ['yamllint']
-
+" show hidden chars
+set list
 " fzf stuff
 if has('nvim')
   let $FZF_DEFAULT_OPTS .= ' --inline-info'
