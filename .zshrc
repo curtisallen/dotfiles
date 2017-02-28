@@ -175,6 +175,7 @@ alias go14='eval "$(GIMME_GO_VERSION=1.4.3 gimme)"'
 alias go15='eval "$(GIMME_GO_VERSION=1.5 gimme)"'
 alias go16='eval "$(GIMME_GO_VERSION=1.6.2 gimme)"'
 alias go17='eval "$(GIMME_GO_VERSION=1.7.1 gimme)"'
+alias go18='eval "$(GIMME_GO_VERSION=1.8 gimme)"'
 go17
 
 #export PATH="$HOME/.gobrew/bin:$PATH"
