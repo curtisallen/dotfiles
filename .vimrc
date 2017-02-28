@@ -37,6 +37,7 @@ NeoBundle 'tpope/vim-unimpaired'
 NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'raimondi/delimitmate'
+NeoBundle 'vim-syntastic/syntastic'
 
 " Required:
 call neobundle#end()
@@ -226,3 +227,17 @@ command! -bang -nargs=* Rg
   \   <bang>0 ? fzf#vim#with_preview('up:60%')
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
+
+" syntastic settings
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+" syntastic linters
+let g:syntastic_yaml_checkers = ['yamllint']
+let g:syntastic_ansible_checkers = ['yamllint']
