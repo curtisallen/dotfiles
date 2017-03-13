@@ -28,7 +28,9 @@ NeoBundle 'vim-airline/vim-airline'
 NeoBundle 'vim-airline/vim-airline-themes'
 NeoBundle 'Yggdroot/indentLine'
 NeoBundle 'editorconfig/editorconfig-vim'
-NeoBundle 'Shougo/deoplete.nvim'
+"NeoBundle 'Shougo/deoplete.nvim'
+"Install with ./install.py --clang-completer --gocode-completer --tern-completer
+NeoBundle 'Valloric/YouCompleteMe'
 NeoBundle 'ctrlpvim/ctrlp.vim'
 NeoBundle 'terryma/vim-multiple-cursors'
 NeoBundle 'neomake/neomake'
@@ -38,6 +40,8 @@ NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'raimondi/delimitmate'
 NeoBundle 'vim-syntastic/syntastic'
+NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
+NeoBundle 'flazz/vim-colorschemes'
 
 " Required:
 call neobundle#end()
@@ -241,3 +245,8 @@ let g:syntastic_check_on_wq = 0
 " syntastic linters
 let g:syntastic_yaml_checkers = ['yamllint']
 let g:syntastic_ansible_checkers = ['yamllint']
+" use jshint
+let g:syntastic_javascript_checkers = ['eslint']
+
+" show any linting errors immediately
+let g:syntastic_check_on_open = 1
