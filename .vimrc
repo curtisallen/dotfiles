@@ -24,6 +24,7 @@ NeoBundle 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 NeoBundle 'junegunn/fzf.vim'
 NeoBundle 'flazz/vim-colorschemes'
 NeoBundle 'faith/vim-go'
+NeoBundle 'SirVer/ultisnips'
 NeoBundle 'vim-airline/vim-airline'
 NeoBundle 'vim-airline/vim-airline-themes'
 NeoBundle 'Yggdroot/indentLine'
@@ -153,6 +154,12 @@ nnoremap <silent> <leader>gg :SignifyToggle<CR>
 nnoremap <Leader>u :UndotreeToggle<CR>
 " If undotree is opened, it is likely one wants to interact with it.
 let g:undotree_SetFocusWhenToggle=1
+
+" ultisnips
+" remap Ultisnips for compatibility for YCM
+let g:UltiSnipsExpandTrigger = '<C-j>'
+let g:UltiSnipsJumpForwardTrigger = '<C-j>'
+let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
 
 " no need to fold things in markdown all the time
 let g:vim_markdown_folding_disabled = 1
