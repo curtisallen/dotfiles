@@ -42,6 +42,7 @@ NeoBundle 'raimondi/delimitmate'
 NeoBundle 'vim-syntastic/syntastic'
 NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
 NeoBundle 'flazz/vim-colorschemes'
+NeoBundle 'mbbill/undotree'
 
 " Required:
 call neobundle#end()
@@ -133,6 +134,25 @@ map <c-f> :call JsBeautify()<cr>
 " 2 space coffeescript for the love of..
 au BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
 
+" vim-fugitive short cuts
+nnoremap <silent> <leader>gs :Gstatus<CR>
+nnoremap <silent> <leader>gd :Gdiff<CR>
+nnoremap <silent> <leader>gc :Gcommit<CR>
+nnoremap <silent> <leader>gb :Gblame<CR>
+nnoremap <silent> <leader>gl :Glog<CR>
+nnoremap <silent> <leader>gp :Git push<CR>
+nnoremap <silent> <leader>gr :Gread<CR>
+nnoremap <silent> <leader>gw :Gwrite<CR>
+nnoremap <silent> <leader>ge :Gedit<CR>
+" Mnemonic _i_nteractive
+nnoremap <silent> <leader>gi :Git add -p %<CR>
+nnoremap <silent> <leader>gg :SignifyToggle<CR>
+
+" undo tree mappings
+nnoremap <Leader>u :UndotreeToggle<CR>
+" If undotree is opened, it is likely one wants to interact with it.
+let g:undotree_SetFocusWhenToggle=1
+
 " no need to fold things in markdown all the time
 let g:vim_markdown_folding_disabled = 1
 
@@ -170,7 +190,7 @@ let g:go_highlight_types = 1
 let g:go_highlight_fields = 1
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
-let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
+let g:go_metalinter_enabled = ['vet', 'vetshadow', 'golint', 'errcheck', 'gosimple', 'vet', 'goconst', 'gosimple']
 let g:go_metalinter_autosave_enabled = ['vet', 'golint']
 let g:go_metalinter_deadline = "5s"
 let g:go_metalinter_autosave = 1
