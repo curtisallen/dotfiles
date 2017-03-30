@@ -43,6 +43,7 @@ NeoBundle 'vim-syntastic/syntastic'
 NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
 NeoBundle 'flazz/vim-colorschemes'
 NeoBundle 'mbbill/undotree'
+NeoBundle 'easymotion/vim-easymotion'
 
 " Required:
 call neobundle#end()
