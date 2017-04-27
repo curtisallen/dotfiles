@@ -45,6 +45,7 @@ NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascr
 NeoBundle 'flazz/vim-colorschemes'
 NeoBundle 'mbbill/undotree'
 NeoBundle 'easymotion/vim-easymotion'
+NeoBundle 'trevordmiller/nova-vim'
 
 " Required:
 call neobundle#end()
@@ -78,9 +79,10 @@ let mapleader = "\<Space>"
 " syntax highligting
 syntax enable
 set background=dark
-let g:solarized_termcolors=256
+"let g:solarized_termcolors=256
 set t_Co=16 " added for chromeos crosh chroot ubuntu
-colorscheme solarized
+"colorscheme solarized
+colorscheme nova
 "set guifont=Knack\ Bold\ Italic\ Nerd\ Font\ Complete\ Mono:h12
 "set guifont=Sauce\ Code\ Pro\ Nerd\ Font\ Complete:h13
 set guifont=devicons
