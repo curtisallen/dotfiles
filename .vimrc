@@ -22,7 +22,6 @@ NeoBundle 'airblade/vim-gitgutter'
 "NeoBundle 'ctrlpvim/ctrlp.vim'
 NeoBundle 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 NeoBundle 'junegunn/fzf.vim'
-NeoBundle 'flazz/vim-colorschemes'
 NeoBundle 'faith/vim-go'
 NeoBundle 'SirVer/ultisnips'
 NeoBundle 'vim-airline/vim-airline'
@@ -42,7 +41,6 @@ NeoBundle 'tpope/vim-surround'
 NeoBundle 'raimondi/delimitmate'
 NeoBundle 'vim-syntastic/syntastic'
 NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
-NeoBundle 'flazz/vim-colorschemes'
 NeoBundle 'mbbill/undotree'
 NeoBundle 'easymotion/vim-easymotion'
 NeoBundle 'trevordmiller/nova-vim'
@@ -78,14 +76,12 @@ let mapleader = "\<Space>"
 
 " syntax highligting
 syntax enable
-set background=dark
+"set background=dark
 "let g:solarized_termcolors=256
 set t_Co=16 " added for chromeos crosh chroot ubuntu
-"colorscheme solarized
-colorscheme nova
 "set guifont=Knack\ Bold\ Italic\ Nerd\ Font\ Complete\ Mono:h12
 "set guifont=Sauce\ Code\ Pro\ Nerd\ Font\ Complete:h13
-set guifont=devicons
+" set guifont=devicons
 
 
 " quiet pls
@@ -176,6 +172,7 @@ map <C-m> :cprevious<CR>
 nnoremap <leader>a :cclose<CR>
 autocmd FileType go nmap <leader>r  <Plug>(go-run)
 autocmd FileType go nmap <leader>t  <Plug>(go-test)
+au FileType go nmap <Leader>dd <Plug>(go-def)
 au FileType go nmap <Leader>ds <Plug>(go-def-split)
 au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
 au FileType go nmap <Leader>dt <Plug>(go-def-tab)
@@ -207,11 +204,12 @@ let g:go_metalinter_autosave = 1
 let g:go_term_enabled=1
 
 " airline theme
-let g:airline_theme='solarized'
+"let g:airline_theme='solarized'
 let g:airline_powerline_fonts = 1
 let g:indentLine_char='│'
 let g:indentLine_color_term = 239
-let g:deoplete#enable_at_startup = 1
+let g:indentLine_setColors = 0
+"let g:deoplete#enable_at_startup = 1
 
 " yaml formatting
 au BufReadPost *.yml set filetype=ansible
@@ -240,9 +238,9 @@ let g:fzf_colors =
 \ { 'fg':      ['fg', 'Normal'],
   \ 'bg':      ['bg', 'Normal'],
   \ 'hl':      ['fg', 'Comment'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'fg+':     ['fg', 'Statement'],
   \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Statement'],
+  \ 'hl+':     ['fg', 'Underlined'],
   \ 'info':    ['fg', 'PreProc'],
   \ 'prompt':  ['fg', 'Conditional'],
   \ 'pointer': ['fg', 'Exception'],
@@ -280,3 +278,5 @@ let g:syntastic_javascript_checkers = ['eslint']
 
 " show any linting errors immediately
 let g:syntastic_check_on_open = 1
+
+colorscheme nova
