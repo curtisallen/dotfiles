@@ -44,6 +44,7 @@ NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascr
 NeoBundle 'mbbill/undotree'
 NeoBundle 'easymotion/vim-easymotion'
 NeoBundle 'trevordmiller/nova-vim'
+NeoBundle 'vimlab/split-term.vim'
 
 " Required:
 call neobundle#end()
@@ -164,6 +165,12 @@ let g:vim_markdown_folding_disabled = 1
 
 " use system clipboard
 set clipboard=unnamed
+
+" Alt+[hjkl] move between panes with grace
+map <A-h> <C-w>h
+map <A-j> <C-w>j
+map <A-k> <C-w>k
+map <A-l> <C-w>l
 
 " vim-go settings
 set autowrite
