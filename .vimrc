@@ -43,7 +43,7 @@ NeoBundle 'vim-syntastic/syntastic'
 NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
 NeoBundle 'mbbill/undotree'
 NeoBundle 'easymotion/vim-easymotion'
-NeoBundle 'trevordmiller/nova-vim'
+NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'vimlab/split-term.vim'
 
 " Required:
@@ -77,8 +77,6 @@ let mapleader = "\<Space>"
 
 " syntax highligting
 syntax enable
-"set background=dark
-"let g:solarized_termcolors=256
 set t_Co=16 " added for chromeos crosh chroot ubuntu
 "set guifont=Knack\ Bold\ Italic\ Nerd\ Font\ Complete\ Mono:h12
 "set guifont=Sauce\ Code\ Pro\ Nerd\ Font\ Complete:h13
@@ -286,4 +284,10 @@ let g:syntastic_javascript_checkers = ['eslint']
 " show any linting errors immediately
 let g:syntastic_check_on_open = 1
 
-colorscheme nova
+" colorscheme nova
+set background=dark
+let g:solarized_termcolors=256
+let g:solarized_termtrans=1
+let g:solarized_contrast="normal"
+let g:solarized_visibility="normal"
+color solarized             " Load a colorscheme

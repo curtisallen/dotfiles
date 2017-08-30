@@ -8,7 +8,6 @@ export ZSH=/Users/callen/.oh-my-zsh
 ZSH_THEME="curtis"
 #ZSH_THEME="agnoster"
 
-alias c='pygmentize -O style=monokai -f console256 -g'
 alias src='cd ~/src'
 alias gornp='cd ~/src/src/github.com/RobotsAndPencils'
 alias venv='source .venv/bin/activate'
@@ -70,7 +69,7 @@ bindkey "^T" znt-cd-widget
 
 # Diff Merge
 export DIFFMERGE_HOME=/Applications/DiffMerge.app/Contents/MacOS
-export PATH="/Users/callen/anaconda/bin:/Users/callen/src/go_appengine:$GOPATH/bin:/Users/callen/bin:$DIFFMERGE_HOME:$PATH"
+export PATH="/usr/local/sbin:/Users/callen/anaconda/bin:/Users/callen/anaconda3/bin:/Users/callen/src/go_appengine:$GOPATH/bin:/Users/callen/bin:$DIFFMERGE_HOME:$PATH"
 #export PATH="/Users/callen/src/go_appengine:$GOPATH/bin:/Users/callen/bin:/Users/callen/Library/Python/2.7/bin:$DIFFMERGE_HOME:$PATH"
 #export PATH="$GOPATH/bin:/Users/callen/bin:/Users/callen/Library/Python/2.7/bin:$DIFFMERGE_HOME:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -103,6 +102,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 export NVM_DIR="/Users/callen/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+nvm use stable
 
 # Powerline
 #powerline-daemon -q
@@ -152,6 +152,9 @@ sshup
 function servethis() {
 	python -m SimpleHTTPServer
 }
+
+# helm completion
+source <(helm completion zsh)
 # Clean go pkg directories
 NO_COLOR='\033[0m'
 OK_COLOR='\033[32;01m'
@@ -175,7 +178,7 @@ alias go14='eval "$(GIMME_GO_VERSION=1.4.3 gimme)"'
 alias go15='eval "$(GIMME_GO_VERSION=1.5 gimme)"'
 alias go16='eval "$(GIMME_GO_VERSION=1.6.2 gimme)"'
 alias go17='eval "$(GIMME_GO_VERSION=1.7.1 gimme)"'
-alias go18='eval "$(GIMME_GO_VERSION=1.8 gimme)"'
+alias go18='eval "$(GIMME_GO_VERSION=1.8.3 gimme)"'
 go18
 
 #export PATH="$HOME/.gobrew/bin:$PATH"
@@ -206,5 +209,7 @@ fi
 if [ -f /Users/callen/google-cloud-sdk/completion.zsh.inc ]; then
   source '/Users/callen/google-cloud-sdk/completion.zsh.inc'
 fi
+
+# alias ls='exa'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
