@@ -33,18 +33,19 @@ NeoBundle 'editorconfig/editorconfig-vim'
 NeoBundle 'Valloric/YouCompleteMe'
 NeoBundle 'ctrlpvim/ctrlp.vim'
 NeoBundle 'terryma/vim-multiple-cursors'
-NeoBundle 'neomake/neomake'
+"NeoBundle 'neomake/neomake'
 NeoBundle 'chase/vim-ansible-yaml'
 NeoBundle 'tpope/vim-unimpaired'
 NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'raimondi/delimitmate'
-NeoBundle 'vim-syntastic/syntastic'
-NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
+"NeoBundle 'vim-syntastic/syntastic'
 NeoBundle 'mbbill/undotree'
 NeoBundle 'easymotion/vim-easymotion'
 NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'vimlab/split-term.vim'
+NeoBundle 'pangloss/vim-javascript'
+NeoBundle 'w0rp/ale'
 
 " Required:
 call neobundle#end()
@@ -126,9 +127,9 @@ endfunction
 autocmd WinEnter * call NERDTreeQuit()
 
 " ctrl f for jsbeautify
-let g:jsbeautify = {"indent_size": 4, "indent_char": "\t"}
-let g:jsbeautify_engine = "node"
-map <c-f> :call JsBeautify()<cr>
+"let g:jsbeautify = {"indent_size": 4, "indent_char": "\t"}
+"let g:jsbeautify_engine = "node"
+"map <c-f> :call JsBeautify()<cr>
 
 " 2 space coffeescript for the love of..
 au BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
@@ -157,6 +158,9 @@ let g:undotree_SetFocusWhenToggle=1
 let g:UltiSnipsExpandTrigger = '<C-j>'
 let g:UltiSnipsJumpForwardTrigger = '<C-j>'
 let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
+
+" ycm python version
+let g:ycm_path_to_python_interpreter = '/usr/bin/python'
 
 " no need to fold things in markdown all the time
 let g:vim_markdown_folding_disabled = 1
@@ -221,10 +225,10 @@ au BufReadPost *.yml set filetype=ansible
 au BufReadPost *.yaml set filetype=ansible
 
 " neomake checking
-autocmd! BufWritePost * Neomake
+"autocmd! BufWritePost * Neomake
 
 "let g:neomake_yml_yamllint_maker = ['yamllint']
-let g:neomake_yml_enabled_makers = ['yamllint']
+"let g:neomake_yml_enabled_makers = ['yamllint']
 " show hidden chars
 set list
 " fzf stuff
@@ -265,25 +269,15 @@ command! -bang -nargs=* Rg
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
 
-" syntastic settings
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" ALE config
+let g:ale_linters = {
+      \ 'javascript': ['standard'],
+      \ 'yaml': ['yamllint'] }
+      "\ 'go': ['gometalinter'],
+let g:ale_fixers = { 'javascript': ['standard'] }
+let g:ale_fix_on_save = 1
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
-" syntastic linters
-let g:syntastic_yaml_checkers = ['yamllint']
-let g:syntastic_ansible_checkers = ['yamllint']
-" use jshint
-let g:syntastic_javascript_checkers = ['eslint']
-
-" show any linting errors immediately
-let g:syntastic_check_on_open = 1
-
+let g:javascript_plugin_flow = 1
 " colorscheme nova
 set background=dark
 let g:solarized_termcolors=256

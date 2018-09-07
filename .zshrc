@@ -13,7 +13,8 @@ alias gornp='cd ~/src/src/github.com/RobotsAndPencils'
 alias venv='source .venv/bin/activate'
 alias ctags="`brew --prefix`/bin/ctags"
 
-eval "$(rbenv init -)"
+# eval "$(rbenv init -)"
+# eval "$(pyenv init -)"
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
@@ -55,12 +56,13 @@ export GOPATH='/Users/callen/src'
 # Add wisely, as too many plugins slow down shell startup.
 # git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 # git clone git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
-plugins=(git gitignore github node osx sublime brew compleate termialapp history-substring-search nvm-zsh ssh-agent fab vagrant jump jsontools go docker tmux aws terraform emoji go httpie valut dircycle zsh-navigation-tools zsh-autosuggestions zsh-syntax-highlighting battery httpie scd)
+plugins=(git gitignore github node osx sublime brew compleate termialapp history-substring-search nvm-zsh ssh-agent fab vagrant jump jsontools go docker tmux aws terraform emoji go httpie valut dircycle zsh-navigation-tools zsh-autosuggestions zsh-syntax-highlighting battery httpie scd z kubectl)
 
 # User configuration
 # zsh cd widget
 zle -N znt-cd-widget
 bindkey "^T" znt-cd-widget
+bindkey "\C-x\C-e" edit-command-line
 
 # Docker config
 #export DOCKER_CERT_PATH=/Users/callen/.boot2docker/certs/boot2docker-vm
@@ -69,12 +71,15 @@ bindkey "^T" znt-cd-widget
 
 # Diff Merge
 export DIFFMERGE_HOME=/Applications/DiffMerge.app/Contents/MacOS
-export PATH="/usr/local/sbin:/Users/callen/anaconda/bin:/Users/callen/anaconda3/bin:/Users/callen/src/go_appengine:$GOPATH/bin:/Users/callen/bin:$DIFFMERGE_HOME:$PATH"
+export PATH="/usr/local/sbin:$GOPATH/bin:/Users/callen/bin:$DIFFMERGE_HOME:$PATH"
 #export PATH="/Users/callen/src/go_appengine:$GOPATH/bin:/Users/callen/bin:/Users/callen/Library/Python/2.7/bin:$DIFFMERGE_HOME:$PATH"
 #export PATH="$GOPATH/bin:/Users/callen/bin:/Users/callen/Library/Python/2.7/bin:$DIFFMERGE_HOME:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
+
+export VISUAL='nvim'
+export EDITOR='nvim'
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -179,7 +184,8 @@ alias go15='eval "$(GIMME_GO_VERSION=1.5 gimme)"'
 alias go16='eval "$(GIMME_GO_VERSION=1.6.2 gimme)"'
 alias go17='eval "$(GIMME_GO_VERSION=1.7.1 gimme)"'
 alias go18='eval "$(GIMME_GO_VERSION=1.8.3 gimme)"'
-go18
+alias go110='eval "$(GIMME_GO_VERSION=1.10.3 gimme)"'
+go110
 
 #export PATH="$HOME/.gobrew/bin:$PATH"
 #eval "$(gobrew init -)"
@@ -195,6 +201,13 @@ alias vi='nvim'
 
 # gitcheckout magic
 alias gcob='git checkout $(git branch | fzf)'
+alias gcorb='checkout_remote_branch $(git branch -r | fzf)'
+function checkout_remote_branch() {
+  git checkout -b ${1:gs/origin\//} $1
+}
+
+# kubectl contexts
+alias kctx='kubectl config use-context $(kubectl config get-contexts -o=name | fzf)'
 
 #function code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $*; }
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
