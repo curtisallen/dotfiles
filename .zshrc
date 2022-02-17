@@ -1,19 +1,31 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/callen/.oh-my-zsh
+export ZSH=/Users/curtis.allen/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="curtis"
+#ZSH_THEME="curtis"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 #ZSH_THEME="agnoster"
 
 alias src='cd ~/src'
-alias gornp='cd ~/src/src/github.com/RobotsAndPencils'
-alias venv='source .venv/bin/activate'
 alias ctags="`brew --prefix`/bin/ctags"
 
 # eval "$(rbenv init -)"
+
+# ctrl=x ctrl+x will open up the last line in vim to edit
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey '^x^x' edit-command-line
+
 # eval "$(pyenv init -)"
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -48,15 +60,17 @@ alias ctags="`brew --prefix`/bin/ctags"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
-export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
-export GOPATH='/Users/callen/src'
+# export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+# export GOPATH='/Users/curtis.allen/src'
+# export GOPRIVATE='slack-github.com'
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 # git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 # git clone git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
-plugins=(git gitignore github node osx sublime brew compleate termialapp history-substring-search nvm-zsh ssh-agent fab vagrant jump jsontools go docker tmux aws terraform emoji go httpie valut dircycle zsh-navigation-tools zsh-autosuggestions zsh-syntax-highlighting battery httpie scd z kubectl)
+#plugins=(git gitignore github node osx sublime brew compleate termialapp history-substring-search ssh-agent go docker tmux aws terraform emoji go httpie zsh-navigation-tools zsh-autosuggestions zsh-syntax-highlighting battery httpie z kubectl) 
+plugins=(git history-substring-search zsh-navigation-tools zsh-autosuggestions zsh-syntax-highlighting z) 
 
 # User configuration
 # zsh cd widget
@@ -64,22 +78,19 @@ zle -N znt-cd-widget
 bindkey "^T" znt-cd-widget
 bindkey "\C-x\C-e" edit-command-line
 
-# Docker config
-#export DOCKER_CERT_PATH=/Users/callen/.boot2docker/certs/boot2docker-vm
-#export DOCKER_TLS_VERIFY=1
-#export DOCKER_HOST=tcp://192.168.59.103:2376
+# BAT pager
+export BAT_PAGER=/usr/local/bin/bat
 
 # Diff Merge
-export DIFFMERGE_HOME=/Applications/DiffMerge.app/Contents/MacOS
-export PATH="/usr/local/sbin:$GOPATH/bin:/Users/callen/bin:$DIFFMERGE_HOME:$PATH"
-#export PATH="/Users/callen/src/go_appengine:$GOPATH/bin:/Users/callen/bin:/Users/callen/Library/Python/2.7/bin:$DIFFMERGE_HOME:$PATH"
-#export PATH="$GOPATH/bin:/Users/callen/bin:/Users/callen/Library/Python/2.7/bin:$DIFFMERGE_HOME:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
+export PATH="$HOME/.cargo/bin:/Users/curtis.allen/Library/Python/3.8/bin:~/.cache/bazel-slack-managed/0.23.0/bin:/usr/local/sbin:/usr/local/bin:$GOPATH/bin:/Users/curtis.allen/bin:$PATH"
+#export PATH="/Users/curtis.allen/src/go_appengine:$GOPATH/bin:/Users/curtis.allen/bin:/Users/curtis.allen/Library/Python/2.7/bin:$DIFFMERGE_HOME:$PATH"
+#export PATH="$GOPATH/bin:/Users/curtis.allen/bin:/Users/curtis.allen/Library/Python/2.7/bin:$DIFFMERGE_HOME:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
 
-export VISUAL='nvim'
-export EDITOR='nvim'
+export VISUAL='vim'
+export EDITOR='vim'
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -105,10 +116,20 @@ export EDITOR='nvim'
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-export NVM_DIR="/Users/callen/.nvm"
+export NVM_DIR="/Users/curtis.allen/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-nvm use stable
+# nvm use stable
 
+#
+# hhvm on docker alias
+#
+alias hd_start="slack hhvm-docker run"
+alias hd_exec="slack hhvm-docker exec"
+alias hd_client="slack hhvm-docker exec hh_client"
+alias hd_test="slack hhvm-docker exec tests/run_unit_in_curl.sh"
+alias hd_stop="slack hhvm-docker stop-container"
+
+alias sc="$HOME/src/slack-cli/bin/slack"
 # Powerline
 #powerline-daemon -q
 
@@ -138,21 +159,19 @@ function saws() {
   ssh ubuntu@$*
 }
 
+# Rename the tmux window pane and z into the directory
+function zt() {
+        windowID=$(tmux display-message -p '#I')
+        tmux rename-window -t $windowID $1
+        z $1
+}
+
 function sshup() {
-	ssh-add ~/.ssh/curtis_rsa
-	ssh-add ~/.ssh/rnp
-	#ssh-add ~/.ssh/tex_staging.pem
-	#ssh-add ~/.ssh/tex_infrastructure.pem
-	#ssh-add ~/.ssh/tex_production.pem
-  #ssh-add ~/.ssh/varo_development.pem
-  #ssh-add ~/.ssh/varo_infrastructure.pem
-  #ssh-add ~/.ssh/varo_dev1.pem
-  #ssh-add ~/.ssh/varo_prod.pem
+  ssh-add -A ~/.ssh/callen-id_rsa
 }
 
 # Start ssh agent
 eval `ssh-agent -s`
-sshup
 
 function servethis() {
 	python -m SimpleHTTPServer
@@ -165,41 +184,39 @@ NO_COLOR='\033[0m'
 OK_COLOR='\033[32;01m'
 ERROR_COLOR='\033[31;01m'
 
-function cleango() {
-    if [ -d "$PWD/Godeps/_workspace/pkg" ] ; then
-        echo "Removing golang packages from ${PWD}/Godeps/_workspace/pkg/darwin_amd64/"
-        rm -r $PWD/Godeps/_workspace/pkg/darwin_amd64/*
-        [ "$(ls -A $PWD/Godeps/_workspace/pkg/darwin_amd64)" ] && echo "${ERROR_COLOR}Not Empty${NO_COLOR}" || echo "${OK_COLOR}Empty${NO_COLOR}"
-    fi
-    if [ -d "$GOPATH/pkg/darwin_amd64/" ] ; then
-        echo "Removing golang packages from ${GOPATH}/pkg/darwin_amd64/"
-        rm -r $GOPATH/pkg/darwin_amd64/*
-        [ "$(ls -A $GOPATH/pkg/darwin_amd64)" ] && echo "${ERROR_COLOR}Not Empty${NO_COLOR}" || echo "${OK_COLOR}Empty${NO_COLOR}"
-    fi
-}
 
 # Gimme alias
-alias go14='eval "$(GIMME_GO_VERSION=1.4.3 gimme)"'
-alias go15='eval "$(GIMME_GO_VERSION=1.5 gimme)"'
-alias go16='eval "$(GIMME_GO_VERSION=1.6.2 gimme)"'
-alias go17='eval "$(GIMME_GO_VERSION=1.7.1 gimme)"'
-alias go18='eval "$(GIMME_GO_VERSION=1.8.3 gimme)"'
-alias go110='eval "$(GIMME_GO_VERSION=1.10.3 gimme)"'
-go110
+alias go113='eval "$(GIMME_GO_VERSION=1.11.3 gimme)"'
+alias go128='eval "$(GIMME_GO_VERSION=1.12.8 gimme)"'
+alias go13='eval "$(GIMME_GO_VERSION=1.13.4 gimme)"'
+alias go14='eval "$(GIMME_GO_VERSION=1.14.7 gimme)"'
+alias go15='eval "$(GIMME_GO_VERSION=1.15.1 gimme)"'
+alias go16='eval "$(GIMME_GO_VERSION=1.16.2 gimme)"'
+alias go17='eval "$(GIMME_GO_VERSION=1.17.6 gimme)"'
+go17
 
 #export PATH="$HOME/.gobrew/bin:$PATH"
 #eval "$(gobrew init -)"
 # NPM runscript
 alias npmrs='npm run-script'
 # Postgres database
-alias pgstart='pg_ctl -D /usr/local/var/postgres9.5 -l /usr/local/var/postgres9.5/server.log start'
-alias pgstop='pg_ctl -D /usr/local/var/postgres9.5 stop -s -m fast'
+# alias pgstart='pg_ctl -D /usr/local/var/postgres9.5 -l /usr/local/var/postgres9.5/server.log start'
+# alias pgstop='pg_ctl -D /usr/local/var/postgres9.5 stop -s -m fast'
 
 # commit to neovim
-alias vim='nvim'
-alias vi='nvim'
+# alias vim='nvim'
+# alias vi='nvim'
 
 # gitcheckout magic
+function gbp() {
+	# check out the given branch and set upstream 
+	git checkout -b $1
+	EXIT_CODE=$?
+	if [ $EXIT_CODE -eq 0 ]; then
+		git push -u origin HEAD
+	fi
+}
+
 alias gcob='git checkout $(git branch | fzf)'
 alias gcorb='checkout_remote_branch $(git branch -r | fzf)'
 function checkout_remote_branch() {
@@ -209,20 +226,27 @@ function checkout_remote_branch() {
 # kubectl contexts
 alias kctx='kubectl config use-context $(kubectl config get-contexts -o=name | fzf)'
 
+# these beaches better reconize
+alias kubebeach='ssh -A -t z-kube-beach-callen-coyote "tmux attach || tmux new -s kube-beach"'
+alias opsbeach='ssh -A -t z-ops-callen-hornet "tmux attach || tmux new -s kube-beach"'
+
 #function code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $*; }
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f /Users/callen/google-cloud-sdk/path.zsh.inc ]; then
-  source '/Users/callen/google-cloud-sdk/path.zsh.inc'
-fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f /Users/callen/google-cloud-sdk/completion.zsh.inc ]; then
-  source '/Users/callen/google-cloud-sdk/completion.zsh.inc'
-fi
-
+alias viewbranch='open $(slack checkpoint -w)'
 # alias ls='exa'
 
+alias weather="curl https://adventurous-chess.glitch.me/39.78/-105.00"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# rg | fzf | vim
+vimsearch () {
+	nvim $(rg $@ | fzf -m | cut -d':' -f1 | sort | uniq)
+}
+
+alias finder="rg --files | fzf | xargs nvim -p"
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+

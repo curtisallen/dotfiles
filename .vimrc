@@ -1,61 +1,100 @@
-"NeoBundle Scripts-----------------------------
+"dein Scripts-----------------------------
 if &compatible
   set nocompatible               " Be iMproved
 endif
 
 " Required:
-set runtimepath+=/Users/callen/.vim/bundle/neobundle.vim/
+set runtimepath+=/Users/callen/.vim/bundle/repos/github.com/Shougo/dein.vim
 
 " Required:
-call neobundle#begin(expand('/Users/callen/.vim/bundle'))
+if dein#load_state('/Users/callen/.vim/bundle')
+  call dein#begin('/Users/callen/.vim/bundle')
 
-" Let NeoBundle manage NeoBundle
-" Required:
-NeoBundleFetch 'Shougo/neobundle.vim'
+  " Let dein manage dein
+  " Required:
+  call dein#add('/Users/callen/.vim/bundle/repos/github.com/Shougo/dein.vim')
 
-" Add or remove your Bundles here:
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'Shougo/neosnippet.vim'
-NeoBundle 'Shougo/neosnippet-snippets'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'airblade/vim-gitgutter'
-"NeoBundle 'ctrlpvim/ctrlp.vim'
-NeoBundle 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-NeoBundle 'junegunn/fzf.vim'
-NeoBundle 'faith/vim-go'
-NeoBundle 'SirVer/ultisnips'
-NeoBundle 'vim-airline/vim-airline'
-NeoBundle 'vim-airline/vim-airline-themes'
-NeoBundle 'Yggdroot/indentLine'
-NeoBundle 'editorconfig/editorconfig-vim'
-"NeoBundle 'Shougo/deoplete.nvim'
-"Install with ./install.py --clang-completer --gocode-completer --tern-completer
-NeoBundle 'Valloric/YouCompleteMe'
-NeoBundle 'ctrlpvim/ctrlp.vim'
-NeoBundle 'terryma/vim-multiple-cursors'
-"NeoBundle 'neomake/neomake'
-NeoBundle 'chase/vim-ansible-yaml'
-NeoBundle 'tpope/vim-unimpaired'
-NeoBundle 'scrooloose/nerdcommenter'
-NeoBundle 'tpope/vim-surround'
-NeoBundle 'raimondi/delimitmate'
-"NeoBundle 'vim-syntastic/syntastic'
-NeoBundle 'mbbill/undotree'
-NeoBundle 'easymotion/vim-easymotion'
-NeoBundle 'altercation/vim-colors-solarized'
-NeoBundle 'vimlab/split-term.vim'
-NeoBundle 'pangloss/vim-javascript'
-NeoBundle 'w0rp/ale'
+  " Add or remove your plugins here:
+  call dein#add('scrooloose/nerdtree')
+  " call dein#add('Shougo/neosnippet.vim')
+  " call dein#add('Shougo/neosnippet-snippets')
 
-" Required:
-call neobundle#end()
+  " You can specify revision/branch/tag.
+  call dein#add('Shougo/deol.nvim', { 'rev': '01203d4c9' })
+
+  " Required:
+  call dein#end()
+  call dein#save_state()
+endif
 
 " Required:
 filetype plugin indent on
+syntax enable
+
+" If you want to install not installed plugins on startup.
+"if dein#check_install()
+"  call dein#install()
+"endif
+
+"End dein Scripts-------------------------
+
+"NeoBundle Scripts-----------------------------
+" if &compatible
+"   set nocompatible               " Be iMproved
+" endif
+
+" Required:
+" set runtimepath+=/Users/callen/.vim/bundle/neobundle.vim/
+
+" Required:
+" call neobundle#begin(expand('/Users/callen/.vim/bundle'))
+
+" Let NeoBundle manage NeoBundle
+" Required:
+" NeoBundleFetch 'Shougo/neobundle.vim'
+
+" Add or remove your Bundles here:
+" NeoBundle 'scrooloose/nerdtree'
+" NeoBundle 'Xuyuanp/nerdtree-git-plugin'
+" NeoBundle 'tpope/vim-fugitive'
+" NeoBundle 'airblade/vim-gitgutter'
+"NeoBundle 'ctrlpvim/ctrlp.vim'
+" NeoBundle 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+" NeoBundle 'junegunn/fzf.vim'
+" NeoBundle 'faith/vim-go'
+" NeoBundle 'SirVer/ultisnips'
+" NeoBundle 'vim-airline/vim-airline'
+" NeoBundle 'vim-airline/vim-airline-themes'
+" NeoBundle 'Yggdroot/indentLine'
+" NeoBundle 'editorconfig/editorconfig-vim'
+"NeoBundle 'Shougo/deoplete.nvim'
+"Install with ./install.py --clang-completer --gocode-completer --tern-completer
+" NeoBundle 'Valloric/YouCompleteMe'
+" NeoBundle 'ctrlpvim/ctrlp.vim'
+" NeoBundle 'terryma/vim-multiple-cursors'
+"NeoBundle 'neomake/neomake'
+" NeoBundle 'chase/vim-ansible-yaml'
+" NeoBundle 'tpope/vim-unimpaired'
+" NeoBundle 'scrooloose/nerdcommenter'
+" NeoBundle 'tpope/vim-surround'
+" NeoBundle 'raimondi/delimitmate'
+"NeoBundle 'vim-syntastic/syntastic'
+" NeoBundle 'mbbill/undotree'
+" NeoBundle 'easymotion/vim-easymotion'
+" NeoBundle 'altercation/vim-colors-solarized'
+" NeoBundle 'vimlab/split-term.vim'
+" NeoBundle 'pangloss/vim-javascript'
+" NeoBundle 'w0rp/ale'
+
+" Required:
+" call neobundle#end()
+
+" Required:
+" filetype plugin indent on
 
 " If there are uninstalled bundles found on startup,
 " this will conveniently prompt you to install them.
-NeoBundleCheck
+" NeoBundleCheck
 "End NeoBundle Scripts-------------------------
 
 "call pathogen#infect()
