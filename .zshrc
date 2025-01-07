@@ -19,13 +19,14 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 alias src='cd ~/src'
 alias ctags="`brew --prefix`/bin/ctags"
 
-# eval "$(rbenv init -)"
+eval "$(rbenv init -)"
 
 # ctrl=x ctrl+x will open up the last line in vim to edit
 autoload -U edit-command-line
 zle -N edit-command-line
 bindkey '^x^x' edit-command-line
 
+# compaudit -u
 # eval "$(pyenv init -)"
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -70,7 +71,7 @@ bindkey '^x^x' edit-command-line
 # git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 # git clone git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
 #plugins=(git gitignore github node osx sublime brew compleate termialapp history-substring-search ssh-agent go docker tmux aws terraform emoji go httpie zsh-navigation-tools zsh-autosuggestions zsh-syntax-highlighting battery httpie z kubectl) 
-plugins=(git history-substring-search zsh-navigation-tools zsh-autosuggestions zsh-syntax-highlighting z) 
+plugins=(git history-substring-search zsh-navigation-tools zsh-autosuggestions zsh-syntax-highlighting docker z) 
 
 # User configuration
 # zsh cd widget
@@ -82,7 +83,7 @@ bindkey "\C-x\C-e" edit-command-line
 export BAT_PAGER=/usr/local/bin/bat
 
 # Diff Merge
-export PATH="$HOME/.cargo/bin:/Users/curtis.allen/Library/Python/3.8/bin:~/.cache/bazel-slack-managed/0.23.0/bin:/usr/local/sbin:/usr/local/bin:$GOPATH/bin:/Users/curtis.allen/bin:$PATH"
+export PATH="$HOME/src/bin:$HOME/.local/bin:$HOME/.nix-profile/bin:/nix/var/nix/profiles/default/bin:$HOME/.rbenv/bin:/usr/local/opt/openjdk/bin:$HOME/.cargo/bin:/Users/curtis.allen/Library/Python/3.8/bin:~/.cache/bazel-slack-managed/0.23.0/bin:/usr/local/sbin:/usr/local/bin:/Users/curtis.allen/bin:/Applications/Docker.app/Contents/Resources/bin:$PATH"
 #export PATH="/Users/curtis.allen/src/go_appengine:$GOPATH/bin:/Users/curtis.allen/bin:/Users/curtis.allen/Library/Python/2.7/bin:$DIFFMERGE_HOME:$PATH"
 #export PATH="$GOPATH/bin:/Users/curtis.allen/bin:/Users/curtis.allen/Library/Python/2.7/bin:$DIFFMERGE_HOME:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -120,15 +121,6 @@ export NVM_DIR="/Users/curtis.allen/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 # nvm use stable
 
-#
-# hhvm on docker alias
-#
-alias hd_start="slack hhvm-docker run"
-alias hd_exec="slack hhvm-docker exec"
-alias hd_client="slack hhvm-docker exec hh_client"
-alias hd_test="slack hhvm-docker exec tests/run_unit_in_curl.sh"
-alias hd_stop="slack hhvm-docker stop-container"
-
 alias sc="$HOME/src/slack-cli/bin/slack"
 # Powerline
 #powerline-daemon -q
@@ -155,8 +147,8 @@ function extract() {
 	fi
 }
 
-function saws() {
-  ssh ubuntu@$*
+function mc() {
+        open "https://mc.tinyspeck.com/mc/search.php?q=$1"
 }
 
 # Rename the tmux window pane and z into the directory
@@ -167,14 +159,14 @@ function zt() {
 }
 
 function sshup() {
-  ssh-add -A ~/.ssh/callen-id_rsa
+  ssh-add --apple-use-keychain ~/.ssh/callen-id_rsa
 }
 
 # Start ssh agent
 eval `ssh-agent -s`
 
 function servethis() {
-	python -m SimpleHTTPServer
+        python3 -m http.server
 }
 
 # helm completion
@@ -186,14 +178,7 @@ ERROR_COLOR='\033[31;01m'
 
 
 # Gimme alias
-alias go113='eval "$(GIMME_GO_VERSION=1.11.3 gimme)"'
-alias go128='eval "$(GIMME_GO_VERSION=1.12.8 gimme)"'
-alias go13='eval "$(GIMME_GO_VERSION=1.13.4 gimme)"'
-alias go14='eval "$(GIMME_GO_VERSION=1.14.7 gimme)"'
-alias go15='eval "$(GIMME_GO_VERSION=1.15.1 gimme)"'
-alias go16='eval "$(GIMME_GO_VERSION=1.16.2 gimme)"'
-alias go17='eval "$(GIMME_GO_VERSION=1.17.6 gimme)"'
-go17
+alias usego='eval "$(GIMME_GO_VERSION=1.23.4 gimme)"'
 
 #export PATH="$HOME/.gobrew/bin:$PATH"
 #eval "$(gobrew init -)"
@@ -250,3 +235,12 @@ alias finder="rg --files | fzf | xargs nvim -p"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+##############################################
+# Adding Source for use with Webapp and Artifactory
+##############################################
+source /Users/curtis.allen/.slack_webapp_artifactory
+
+# pyenv setup
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
