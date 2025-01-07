@@ -170,7 +170,7 @@ function servethis() {
 }
 
 # helm completion
-source <(helm completion zsh)
+# source <(helm completion zsh)
 # Clean go pkg directories
 NO_COLOR='\033[0m'
 OK_COLOR='\033[32;01m'
