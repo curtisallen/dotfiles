@@ -1,10 +1,3 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/curtis.allen/.oh-my-zsh
 
@@ -13,13 +6,11 @@ export ZSH=/Users/curtis.allen/.oh-my-zsh
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 #ZSH_THEME="curtis"
-ZSH_THEME="powerlevel10k/powerlevel10k"
+#ZSH_THEME="powerlevel10k/powerlevel10k"
 #ZSH_THEME="agnoster"
 
 alias src='cd ~/src'
-alias ctags="`brew --prefix`/bin/ctags"
 
-eval "$(rbenv init -)"
 
 # ctrl=x ctrl+x will open up the last line in vim to edit
 autoload -U edit-command-line
@@ -83,13 +74,18 @@ bindkey "\C-x\C-e" edit-command-line
 export BAT_PAGER=/usr/local/bin/bat
 
 # Diff Merge
-export PATH="$HOME/src/bin:$HOME/.local/bin:$HOME/.nix-profile/bin:/nix/var/nix/profiles/default/bin:$HOME/.rbenv/bin:/usr/local/opt/openjdk/bin:$HOME/.cargo/bin:/Users/curtis.allen/Library/Python/3.8/bin:~/.cache/bazel-slack-managed/0.23.0/bin:/usr/local/sbin:/usr/local/bin:/Users/curtis.allen/bin:/Applications/Docker.app/Contents/Resources/bin:$PATH"
+export PATH="$HOME/src/bin:$HOME/.local/bin:$HOME/.nix-profile/bin:/nix/var/nix/profiles/default/bin:$HOME/.rbenv/bin:/usr/local/opt/openjdk/bin:$HOME/.cargo/bin:/Users/curtis.allen/Library/Python/3.8/bin:~/.cache/bazel-slack-managed/0.23.0/bin:/usr/local/sbin:/usr/local/bin:/Users/curtis.allen/bin:/Applications/Docker.app/Contents/Resources/bin:/opt/homebrew/bin/:$PATH"
 #export PATH="/Users/curtis.allen/src/go_appengine:$GOPATH/bin:/Users/curtis.allen/bin:/Users/curtis.allen/Library/Python/2.7/bin:$DIFFMERGE_HOME:$PATH"
 #export PATH="$GOPATH/bin:/Users/curtis.allen/bin:/Users/curtis.allen/Library/Python/2.7/bin:$DIFFMERGE_HOME:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
 
+if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
+  eval "$(oh-my-posh init zsh --config $(brew --prefix oh-my-posh)/themes/powerlevel10k_rainbow.omp.json)"
+fi
+
+eval "$(rbenv init -)"
 export VISUAL='vim'
 export EDITOR='vim'
 
@@ -233,12 +229,12 @@ vimsearch () {
 alias finder="rg --files | fzf | xargs nvim -p"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+#[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 ##############################################
 # Adding Source for use with Webapp and Artifactory
 ##############################################
-source /Users/curtis.allen/.slack_webapp_artifactory
+#source /Users/curtis.allen/.slack_webapp_artifactory
 
 # pyenv setup
 export PYENV_ROOT="$HOME/.pyenv"
