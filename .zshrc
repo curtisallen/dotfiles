@@ -71,7 +71,7 @@ bindkey "^T" znt-cd-widget
 bindkey "\C-x\C-e" edit-command-line
 
 # BAT pager
-export BAT_PAGER=/usr/local/bin/bat
+# export BAT_PAGER=/usr/local/bin/bat
 
 # Diff Merge
 export PATH="$HOME/src/bin:$HOME/.local/bin:$HOME/.nix-profile/bin:/nix/var/nix/profiles/default/bin:$HOME/.rbenv/bin:/usr/local/opt/openjdk/bin:$HOME/.cargo/bin:/Users/curtis.allen/Library/Python/3.8/bin:~/.cache/bazel-slack-managed/0.23.0/bin:/usr/local/sbin:/usr/local/bin:/Users/curtis.allen/bin:/Applications/Docker.app/Contents/Resources/bin:/opt/homebrew/bin/:$PATH"
@@ -159,7 +159,7 @@ function sshup() {
 }
 
 # Start ssh agent
-eval `ssh-agent -s`
+# eval `ssh-agent -s`
 
 function servethis() {
         python3 -m http.server
@@ -174,7 +174,7 @@ ERROR_COLOR='\033[31;01m'
 
 
 # Gimme alias
-alias usego='eval "$(GIMME_GO_VERSION=1.23.4 gimme)"'
+alias usego='eval "$(GIMME_GO_VERSION=1.25.0 gimme)"'
 
 #export PATH="$HOME/.gobrew/bin:$PATH"
 #eval "$(gobrew init -)"
@@ -208,8 +208,27 @@ function checkout_remote_branch() {
 alias kctx='kubectl config use-context $(kubectl config get-contexts -o=name | fzf)'
 
 # these beaches better reconize
-alias kubebeach='ssh -A -t z-kube-beach-callen-coyote "tmux attach || tmux new -s kube-beach"'
-alias opsbeach='ssh -A -t z-ops-callen-hornet "tmux attach || tmux new -s kube-beach"'
+alias opsbeach='slack beach -r ops'
+
+# Function to set up a new EC2 development box
+sandcastle() {
+  echo "Setting up new development environment..."
+  hostname=$(slack beach -r ops --print)
+  echo "Connecting to $hostname..."
+
+  ssh $hostname 'mkdir -p ~/src && git clone git@slack-github.com:callen/dotfiles.git ~/src/dotfiles && RUNZSH=no sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" && rm ~/.zshrc && ln -s ~/src/dotfiles/.zshrc ~/.zshrc && cd ~/src/dotfiles && ./bootstrap.sh'
+
+  echo "Setup complete! Your sandcastle is ready."
+}
+sandcastleml() {
+  echo "Setting up new development environment..."
+  hostname=$(slack beach -r ml-beach --print)
+  echo "Connecting to $hostname..."
+
+  ssh $hostname 'mkdir -p ~/src && git clone git@slack-github.com:callen/dotfiles.git ~/src/dotfiles && RUNZSH=no sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" && rm ~/.zshrc && ln -s ~/src/dotfiles/.zshrc ~/.zshrc && cd ~/src/dotfiles && ./bootstrap.sh'
+
+  echo "Setup complete! Your sandcastle is ready."
+}
 
 #function code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $*; }
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
@@ -240,3 +259,16 @@ alias finder="rg --files | fzf | xargs nvim -p"
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
+export CLAUDE_CODE_USE_BEDROCK=1
+export PATH="$HOME/bin:$PATH"
+###_BEGIN_KUBECTL_AUTOCOMPLETE_###
+source <(kubectl completion zsh)
+###_END_KUBECTL_AUTOCOMPLETE_###
+###_BEGIN_KUBECONFIG_COMMERCIAL_###
+export KUBECONFIG=$KUBECONFIG:/Users/curtis.allen/.kube/config-commercial:$HOME/.kube/config
+###_END_KUBECONFIG_COMMERCIAL_###
+
+##############################################
+# Adding Source for use with Webapp and Artifactory
+##############################################
+source /Users/curtis.allen/.slack_webapp_artifactory
