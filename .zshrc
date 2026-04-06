@@ -232,22 +232,33 @@ sandcastleml() {
 
 # Spin up a DevSpace, SSH in, and launch clawd-opus
 # With no args, pick an existing DevSpace via fzf and SSH in
-# Use -l to run lazygit instead of clawd-opus
+# Use -l for lazygit, -s for plain SSH
 devup() {
   local cmd="clawd-opus"
   if [[ "$1" == "-l" ]]; then
     cmd="lazygit"
     shift
+  elif [[ "$1" == "-s" ]]; then
+    cmd=""
+    shift
   fi
 
   if [[ -n "$1" ]]; then
-    slack remote-dev -r slack/webapp -f -b "$1" --cursor --ssh-remote-dev -t -- "$cmd"
+    if [[ -n "$cmd" ]]; then
+      slack remote-dev -r slack/webapp -f -b "$1" --cursor --ssh-remote-dev -t -- "$cmd"
+    else
+      slack remote-dev -r slack/webapp -f -b "$1" --cursor --ssh-remote-dev
+    fi
   else
     local selection
     selection=$(slack remote-dev --envs 2>&1 | grep '^|' | grep -v '^ *| #' | fzf --ansi) || return
     local devid=$(echo "$selection" | awk -F'|' '{print $7}' | xargs)
     echo "Connecting to $devid..."
-    ssh -At "$devid" "bash -ic 'wa && $cmd'"
+    if [[ -n "$cmd" ]]; then
+      ssh -At "$devid" "bash -ic 'wa && $cmd'"
+    else
+      ssh -A "$devid"
+    fi
   fi
 }
 
