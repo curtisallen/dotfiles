@@ -254,18 +254,12 @@ devup() {
     selection=$(slack remote-dev --envs 2>&1 | grep '^|' | grep -v '^ *| #' | fzf --ansi) || return
     local devid=$(echo "$selection" | awk -F'|' '{print $7}' | xargs)
     echo "Connecting to $devid..."
-    if [[ -n "$CMUX_BUNDLE_ID" ]]; then
-      if [[ -n "$cmd" ]]; then
-        cmux ssh "$devid" --name "$devid" --ssh-option RequestTTY=force --ssh-option ForwardAgent=yes -- "bash -ic 'wa && $cmd; exec bash -l'"
-      else
-        cmux ssh "$devid" --name "$devid"
-      fi
+    if [[ -n "$CMUX_BUNDLE_ID" && "$cmd" == clawd* ]]; then
+      cmux ssh "$devid" --ssh-option RequestTTY=force --ssh-option ForwardAgent=yes -- "bash -ic 'wa && $cmd; exec bash -l'"
+    elif [[ -n "$cmd" ]]; then
+      ssh -At "$devid" "bash -ic 'wa && $cmd'"
     else
-      if [[ -n "$cmd" ]]; then
-        ssh -At "$devid" "bash -ic 'wa && $cmd'"
-      else
-        ssh -A "$devid"
-      fi
+      ssh -A "$devid"
     fi
   fi
 }
